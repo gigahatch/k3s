@@ -498,6 +498,9 @@ func (a *agentTunnel) getProxySyncer(ctx context.Context, wg *sync.WaitGroup, tl
 	// the goroutine started by the previous call is cancelled to prevent it from updating
 	// if the delay has not yet expired.
 	return func(addresses []string) {
+		// disallow updating adresses
+		return
+
 		if len(addresses) == 0 {
 			logrus.Debugf("Skipping apiserver addresses sync: %v", addresses)
 			return
